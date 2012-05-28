@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+
+class RspecEngine < Thor
+  option :mountable, type: :boolean, default: true
+  desc "new NAME", "Build a new rspec-ready engine named NAME"
+  def new(name)
+    puts %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : ''}--skip-test-unit --dummy-path=spec/dummy}
+  end
+end
+
+RspecEngine.start(ARGV)

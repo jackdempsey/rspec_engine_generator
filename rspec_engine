@@ -20,6 +20,28 @@ class RspecEngine < Thor
       insert_into_file "Rakefile", :after => "load 'rails/tasks/engine.rake'" do
         %{\n\nrequire 'rspec/core/rake_task'\nRSpec::Core::RakeTask.new(:spec)\ntask :default => :spec}
       end
+      run 'git add . && git commit -m"added rspec"'
+      empty_directory "spec/requests"
+      create_file "spec/requests/requests_helper.rb", "require 'spec_helper.rb'\nrequire 'capybara/rspec'"
+      create_file "spec/requests/root_spec.rb", <<-SPEC.gsub(/^ {8}/, '')
+        require 'requests/requests_helper'
+
+        feature "Root", %q{
+          In order to provide base functionality
+          As a user
+          I want to view the root url
+        } do
+
+          background do
+          end
+
+          scenario "View " do
+            visit '/'
+            page.should have_content('Welcome')
+          end
+        end
+      SPEC
+      run 'git add . && git ci -am"installed capybara"'
     end
   end
 end

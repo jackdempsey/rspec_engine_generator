@@ -3,10 +3,19 @@
 require 'thor'
 
 class RspecEngine < Thor
+  include Thor::Actions
+
   option :mountable, type: :boolean, default: true
   desc "new NAME", "Build a new rspec-ready engine named NAME"
   def new(name)
-    puts %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : ''}--skip-test-unit --dummy-path=spec/dummy}
+    command = %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : ''}--skip-test-unit --dummy-path=spec/dummy}
+    system command
+    inside name do
+      insert_into_file "#{name}.gemspec", :after => 's.add_development_dependency "sqlite3"' do
+        %{\n  s.add_development_dependency "rspec-rails"\n  s.add_development_dependency "capybara"}
+      end
+      run "bundle install"
+    end
   end
 end
 

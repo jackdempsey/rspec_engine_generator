@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "rspec-engine-generator"
   gem.require_paths = ["lib"]
   gem.version       = Rspec::Engine::Generator::VERSION
+
+  gem.add_dependency("thor", "~> 0.15.2")
 end

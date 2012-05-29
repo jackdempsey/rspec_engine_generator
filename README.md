@@ -12,7 +12,15 @@ and elsewhere and tried to make this simple and easy.
 
 ## Usage
 
-$ rspec\_engine new NAME
+Usage:
+  rspec\_engine new NAME
+
+Options:
+  [--mountable]  # choose whether to make the engine mountable or not
+(if false, engine is --full)
+                 # Default: true
+
+Build a new rspec-ready engine named NAME
 
 ## Notes
 

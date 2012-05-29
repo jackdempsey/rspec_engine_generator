@@ -1,24 +1,18 @@
 # Rspec::Engine::Generator
 
-TODO: Write a gem description
+Simple Thor based gem that lets you easily create a Rails 3 engine.
+Standard Rails prefers TestUnit and it's not obvious or trivial to set
+things up yourself, so I've bundled together great ideas from
+http://brainbicycle.net/blog/2011/10/03/create-a-rails-engine-with-rspec-and-capybara-tests
+and elsewhere and tried to make this simple and easy.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'rspec-engine-generator'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rspec-engine-generator
+  $ gem install rspec-engine-generator
 
 ## Usage
 
-TODO: Write usage instructions here
+$ rspec-engine new NAME
 
 ## Contributing
 

@@ -11,6 +11,7 @@ class RspecEngine < Thor
     command = %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : ''}--skip-test-unit --skip-bundle --dummy-path=spec/dummy}
     system command
     inside name do
+      run 'git init && git add . && git commit -m"Base engine"'
       insert_into_file "#{name}.gemspec", :after => 's.add_development_dependency "sqlite3"' do
         %{\n  s.add_development_dependency "rspec-rails"\n  s.add_development_dependency "capybara"}
       end

@@ -12,7 +12,13 @@ and elsewhere and tried to make this simple and easy.
 
 ## Usage
 
-$ rspec-engine new NAME
+$ rspec\_engine new NAME
+
+## Notes
+
+Looks like there's some wonkiness going on if you generate an engine
+with a dash in it. So, name your engines foo\_engine not foo-engine to
+avoid a headache.
 
 ## Contributing
 

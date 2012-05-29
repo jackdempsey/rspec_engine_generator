@@ -5,10 +5,10 @@ require 'thor'
 class RspecEngine < Thor
   include Thor::Actions
 
-  option :mountable, type: :boolean, default: true
+  option :mountable, type: :boolean, default: true, desc: "choose whether to make the engine mountable or not (if false, engine is --full)"
   desc "new NAME", "Build a new rspec-ready engine named NAME"
   def new(name)
-    command = %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : ''}--skip-test-unit --skip-bundle --dummy-path=spec/dummy}
+    command = %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : '--full'}--skip-test-unit --skip-bundle --dummy-path=spec/dummy}
     system command
     inside name do
       run 'git init && git add . && git commit -m"Base engine"'

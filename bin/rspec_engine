@@ -18,7 +18,7 @@ class RspecEngine < Thor
       run "bundle install"
       run "rails g rspec:install"
       gsub_file 'spec/spec_helper.rb', /..\/config\/environment/, 'dummy/config/environment'
-      insert_into_file "Rakefile", :after => "load 'rails/tasks/engine.rake'" do
+      insert_into_file "Rakefile", after: "load 'rails/tasks/engine.rake'" do
         %{\n\nrequire 'rspec/core/rake_task'\nRSpec::Core::RakeTask.new(:spec)\ntask :default => :spec}
       end
       run 'git add . && git commit -m"added rspec"'

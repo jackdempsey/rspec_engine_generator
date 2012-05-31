@@ -43,28 +43,39 @@ class RspecEngine < Thor
         end
       SPEC
       run 'git add . && git ci -am"installed capybara"'
-      insert_into_file 'spec/dummy/config/routes.rb', " root to: 'home#index'\n", before: 'end'
+
+      insert_into_file 'spec/dummy/config/routes.rb', " root to: 'home#index'\n", after: '.draw do'
       # generate a home controller and place to link off to engine from
       inside 'spec/dummy' do
         run "rails g controller Home index"
         create_file 'app/views/home/index.html.erb', force: true do
-          content = <<-INDEX.gsub(/^ {12}/, '')
-            <h1>Welcome to the Dummy app for #{name}</h1>
-            <ul>
-              <li><%= link_to "View #{name} dashboard", #{name}_path %></li>
-            </ul>
-          INDEX
+          content = "<h1>Welcome to the Dummy app for #{name}</h1>"
+          # if generating a mountable engine, add a link to the dashboard we'll setup below
+          if options[:mountable]
+            content += <<-INDEX.gsub(/^ {12}/, '')
+              <ul>
+                <li><%= link_to "View #{name} dashboard", #{name}_path %></li>
+              </ul>
+            INDEX
+          end
+          content
         end
+        run 'git add . && git ci -am"created Home controller for easy start to engine development"'
       end
 
-      # now create a basic dashboard for engine
-      run "rails g controller Dashboard index"
-      insert_into_file 'config/routes.rb', " root to: 'dashboard#index'\n", before: 'end'
-      create_file "app/views/#{name}/dashboard/index.html.erb", force: true do
-        content = <<-INDEX.gsub(/^ {10}/, '')
-          <h1>Welcome to an example Dashboard for #{name}</h1>
-        INDEX
+      # if we're generating a mountable engine, then generate a simple dashboard controller
+      # if it's a full engine, then there's no real dashboard, as it's integrated fully into the host app, not alongside
+      if options[:mountable]
+        run "rails g controller Dashboard index"
+        insert_into_file 'config/routes.rb', " root to: 'dashboard#index'\n", after: '.draw do'
+        create_file "app/views/#{name}/dashboard/index.html.erb", force: true do
+          content = <<-INDEX.gsub(/^ {10}/, '')
+            <h1>Welcome to an example Dashboard for #{name}</h1>
+          INDEX
+        end
+        run 'git add . && git ci -am"created Dashboardcontroller for easy starting place to link off to subcomponents of mounted engine."'
       end
+
     end
   end
 end

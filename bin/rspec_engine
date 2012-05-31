@@ -43,6 +43,10 @@ class RspecEngine < Thor
         end
       SPEC
       run 'git add . && git ci -am"installed capybara"'
+      insert_into_file 'spec/dummy/config/routes.rb', " root to: 'home#index'", before: 'end'
+      inside 'spec/dummy' do
+        run "rails g controller Home index"
+      end
     end
   end
 end

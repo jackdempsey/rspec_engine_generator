@@ -8,8 +8,8 @@ class RspecEngine < Thor
   option :mountable, type: :boolean, default: true, desc: "choose whether to make the engine mountable or not (if false, engine is --full)"
   desc "new NAME", "Build a new rspec-ready engine named NAME"
   def new(name)
-    command = %{rails plugin new #{name} #{options[:mountable] ? '--mountable ' : '--full'}--skip-test-unit --skip-bundle --dummy-path=spec/dummy}
-    system command
+    command = %{rails plugin new #{name} #{options[:mountable] ? '--mountable' : '--full'} --skip-test-unit --skip-bundle --dummy-path=spec/dummy}
+    run command
     inside name do
       run 'git init && git add . && git commit -m"Base engine"'
       insert_into_file "#{name}.gemspec", :after => 's.add_development_dependency "sqlite3"' do

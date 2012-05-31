@@ -1,0 +1,3 @@
+add good examples of most things you'd want to configure, commented out in the generated app
+  - routing calls. when to use engine.resources_path main_app.something_path
+  - how to setup EngineName.configure do |config| blocks

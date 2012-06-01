@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Rspec::Engine::Generator::VERSION
 
   gem.add_dependency("thor", "~> 0.15.2")
+  gem.add_dependency("rails", "~> 3.0")
 end

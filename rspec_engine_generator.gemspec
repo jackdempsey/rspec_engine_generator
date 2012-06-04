@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/rspec-engine-generator/version', __FILE__)
+require File.expand_path('../lib/rspec_engine_generator/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Jack Dempsey"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "rspec-engine-generator"
+  gem.name          = "rspec_engine_generator"
   gem.require_paths = ["lib"]
   gem.version       = Rspec::Engine::Generator::VERSION
 

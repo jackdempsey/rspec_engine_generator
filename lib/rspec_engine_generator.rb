@@ -1,4 +1,4 @@
-require "rspec-engine-generator/version"
+require "rspec_engine_generator/version"
 
 module Rspec
   module Engine

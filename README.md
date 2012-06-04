@@ -8,7 +8,7 @@ and elsewhere and tried to make this simple and easy.
 
 ## Installation
 
-  $ gem install rspec-engine-generator
+  $ gem install rspec_engine_generator
 
 ## Usage
 

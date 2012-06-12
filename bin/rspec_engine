@@ -44,7 +44,7 @@ class RspecEngine < Thor
       SPEC
       run 'git add . && git ci -am"installed capybara"'
 
-      insert_into_file 'spec/dummy/config/routes.rb', " root to: 'home#index'\n", after: '.draw do'
+      insert_into_file 'spec/dummy/config/routes.rb', "\n  root to: 'home#index'\n", after: '.draw do'
       # generate a home controller and place to link off to engine from
       inside 'spec/dummy' do
         run "rails g controller Home index"
@@ -67,7 +67,7 @@ class RspecEngine < Thor
       # if it's a full engine, then there's no real dashboard, as it's integrated fully into the host app, not alongside
       if options[:mountable]
         run "rails g controller Dashboard index"
-        insert_into_file 'config/routes.rb', " root to: 'dashboard#index'\n", after: '.draw do'
+        insert_into_file 'config/routes.rb', "\n  root to: 'dashboard#index'\n", after: '.draw do'
         create_file "app/views/#{name}/dashboard/index.html.erb", force: true do
           content = <<-INDEX.gsub(/^ {10}/, '')
             <h1>Welcome to an example Dashboard for #{name}</h1>

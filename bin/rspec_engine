@@ -21,6 +21,15 @@ class RspecEngine < Thor
       insert_into_file "Rakefile", after: "load 'rails/tasks/engine.rake'" do
         %{\n\nrequire 'rspec/core/rake_task'\nRSpec::Core::RakeTask.new(:spec)\ntask :default => :spec}
       end
+      insert_into_file "lib/#{name}/engine.rb", after: "Rails::Engine" do
+        text = <<-TEXT.gsub(/^ {4}/,'')
+
+        config.generators do |g|
+          g.test_framework :rspec
+          g.integration_tool :rspec
+        end
+        TEXT
+      end
       run 'git add . && git commit -m"added rspec"'
       empty_directory "spec/requests"
       create_file "spec/requests/requests_helper.rb", "require 'spec_helper.rb'\nrequire 'capybara/rspec'"

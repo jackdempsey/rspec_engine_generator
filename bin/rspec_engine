@@ -51,7 +51,7 @@ class RspecEngine < Thor
           end
         end
       SPEC
-      run 'git add . && git ci -am"installed capybara"'
+      run 'git add . && git commit -am"installed capybara"'
 
       insert_into_file 'spec/dummy/config/routes.rb', "\n  root to: 'home#index'\n", after: '.draw do'
       # generate a home controller and place to link off to engine from
@@ -69,7 +69,7 @@ class RspecEngine < Thor
           end
           content
         end
-        run 'git add . && git ci -am"created Home controller for easy start to engine development"'
+        run 'git add . && git commit -am"created Home controller for easy start to engine development"'
       end
 
       # if we're generating a mountable engine, then generate a simple dashboard controller
@@ -82,7 +82,7 @@ class RspecEngine < Thor
             <h1>Welcome to an example Dashboard for #{name}</h1>
           INDEX
         end
-        run 'git add . && git ci -am"created Dashboardcontroller for easy starting place to link off to subcomponents of mounted engine."'
+        run 'git add . && git commit -am"created Dashboardcontroller for easy starting place to link off to subcomponents of mounted engine."'
       end
 
     end
